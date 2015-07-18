@@ -24,6 +24,7 @@ public class MyHomeActivity extends Activity {
 //        textView.setTextSize(40);
 //        textView.setText(email);
 //        setContentView(textView);
+        // test
     }
 
 
