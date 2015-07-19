@@ -16,6 +16,13 @@ public class Event {
         this.organizer = organizer;
     }
 
+    public Event(String name, int ID, Double[] location) {
+        this.name = name;
+        this.ID = ID;
+        this.location = location;
+        this.organizer = organizer;
+    }
+
     public String getName() {
         return name;
     }

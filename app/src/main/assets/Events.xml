@@ -1,0 +1,23 @@
+<Events>
+	<Event ID="1">
+		<Name>Party at Shadyside</Name>
+		<Location>
+			<GeoLat>40.449522</GeoLat>
+			<GeoLong>-79.930584</GeoLong>
+		</Location>		
+	</Event>
+	<Event ID="2">
+		<Name>Party at Squirell hill</Name>
+		<Location>
+			<GeoLat>40.429796</GeoLat>
+			<GeoLong>-79.927459</GeoLong>
+		</Location>		
+	</Event>
+	<Event ID="3">
+		<Name>Party at North craig street</Name>
+		<Location>
+			<GeoLat>40.450982</GeoLat>
+			<GeoLong>-79.951046</GeoLo
+		</Location>		
+	</Event>
+</Events>
