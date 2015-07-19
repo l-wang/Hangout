@@ -1,0 +1,19 @@
+<Registerations>
+	<Registeration>
+		<UID id="1">
+			<EID>2</EID>
+			<EID>3</EID>
+		</UID>
+	</Registeration>
+	<Registeration>
+		<UID id="2">
+			<EID>3</EID>
+		</UID>
+	</Registeration>
+		<Registeration>
+		<UID id="2">
+			<EID>3</EID>
+			<EID>1</EID>
+		</UID>
+	</Registeration>
+</Registerations>
