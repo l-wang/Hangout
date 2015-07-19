@@ -58,19 +58,16 @@
         <activity
             android:name=".MapActivity"
             android:label="@string/title_activity_map"
-            android:parentActivityName=".ProfileActivity" >
+            android:parentActivityName=".MapActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.supersaiyans.hangout.ProfileActivity" />
+                android:value="com.example.supersaiyans.hangout.MapActivity" />
         </activity>
-        <!-- <activity -->
-        <!-- android:name=".MapActivity" -->
-        <!-- android:label="@string/title_activity_map" -->
-        <!-- android:parentActivityName=".activity_profile" > -->
-        <!-- <meta-data -->
-        <!-- android:name="android.support.PARENT_ACTIVITY" -->
-        <!-- android:value="com.example.supersaiyans.hangout.MapActivity" /> -->
-        <!-- </activity> -->
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBvuB8uqBpqQh0VDoaf8_bKWuFjpKna0sU"/>
+
     </application>
 
 </manifest>

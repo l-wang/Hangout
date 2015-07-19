@@ -3,7 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Hangout.iml" filepath="$PROJECT_DIR$/Hangout.iml" />
+<<<<<<< Updated upstream
       <module fileurl="file://$PROJECT_DIR$/Hangout.iml" filepath="$PROJECT_DIR$/Hangout.iml" />
+=======
+>>>>>>> Stashed changes
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
