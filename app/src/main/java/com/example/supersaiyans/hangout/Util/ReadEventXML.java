@@ -4,28 +4,14 @@ import android.content.Context;
 
 
 import com.example.supersaiyans.hangout.model.Event;
-import com.example.supersaiyans.hangout.model.User;
 
 import org.xml.sax.Attributes;
-import org.xml.sax.ContentHandler;
-import org.xml.sax.DTDHandler;
-import org.xml.sax.EntityResolver;
-import org.xml.sax.ErrorHandler;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-import org.xml.sax.SAXNotRecognizedException;
-import org.xml.sax.SAXNotSupportedException;
-import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URI;
 import java.util.ArrayList;
 
 import javax.xml.parsers.SAXParser;
@@ -41,7 +27,7 @@ public class ReadEventXML {
 
         try {
 
-            InputStream is = c.getAssets().open("Events.xml");
+            InputStream is = c.getAssets().open("events.xml");
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser saxParser = factory.newSAXParser();

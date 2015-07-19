@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Hangout</string>
 
+    <!-- Strings related to Facebook-->
+    <string name="facebook_app_id">474167099417747</string>
+
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
