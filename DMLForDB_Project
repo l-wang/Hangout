@@ -1,0 +1,39 @@
+create table Event
+(EventID Number(5),
+name varchar2(20),
+latlocation Number(9,6),
+longlocation Number(9,6),
+time DATE,
+userID Number(5),
+description varchar2(100),
+CONSTRAINT  EVENT_EventID_pk PRIMARY KEY (EventID)
+);
+
+create table AppUser
+(UserID Number(5),
+name varchar2(20),
+latlocation Number(9,6),
+longlocation Number(9,6),
+userloginid varchar(20),
+userloginpwd varchar(20),
+CONSTRAINT  AppUser_UserID_pk PRIMARY KEY (UserID)
+);
+
+create table AppComment
+(CommentID Number(5),
+text varchar2(100),
+UserID Number(9,6)
+CONSTRAINT 	AppComment_UserID_fk REFERENCES AppUser (UserID),
+CONSTRAINT  AppComment_CommentID_pk PRIMARY KEY (CommentID)
+);
+
+create table EventCommentMap
+(EventID Number(5)
+CONSTRAINT 	EventCommentMap_EventID_fk REFERENCES Event (EventID),
+CommentID Number(5)
+CONSTRAINT 	EventCommentMap_CommentID_fk REFERENCES AppComment (CommentID),
+CONSTRAINT  EventCommentMap_CommentID_pk PRIMARY KEY (EventID,CommentID)
+);
+
+alter table event
+add constraint Event_UserID_fk FOREIGN KEY (userID) REFERENCES AppUser (UserID);
