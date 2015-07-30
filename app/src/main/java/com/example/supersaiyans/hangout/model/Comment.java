@@ -7,6 +7,7 @@ public class Comment {
     private int commentID;
     private String commentText;
 
+    //Creating class
     public Comment(int commentID, String commentText) {
         super();
         this.commentID = commentID;
