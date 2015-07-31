@@ -34,7 +34,7 @@ public class Client implements ClientInterface{
     }
 
 
-
+/*
     @Override
     public ArrayList<Event> getEvent(Double[] location, Double distance) {
         ArrayList<Event> arrEvent = new ArrayList<>();
@@ -77,7 +77,7 @@ public class Client implements ClientInterface{
 
 
 
-    }
+    }*/
 
 
 
