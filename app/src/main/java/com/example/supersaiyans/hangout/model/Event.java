@@ -1,8 +1,6 @@
 package com.example.supersaiyans.hangout.model;
 
-/**
- * Created by Chetan on 7/18/2015.
- */
+
 public class Event {
     private String name;
     private int ID;
@@ -20,7 +18,6 @@ public class Event {
         this.name = name;
         this.ID = ID;
         this.location = location;
-        this.organizer = organizer;
     }
 
     public String getName() {
