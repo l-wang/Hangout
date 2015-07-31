@@ -1,5 +1,7 @@
 package com.example.supersaiyans.hangout.client;
 
+import com.example.supersaiyans.hangout.model.Event;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -16,6 +18,8 @@ public class DefaultSocketClient extends Thread implements SocketClientInterface
     private Socket socket;
     private String strHost;
     private int iPort;
+    boolean createEvent;
+    Event event;
 
 
     public DefaultSocketClient(String strHost, int iPort) {
@@ -43,6 +47,17 @@ public class DefaultSocketClient extends Thread implements SocketClientInterface
         this.iPort = iPort;
     }
 
+    public void setCreateEvent(boolean value) {
+        this.createEvent = value;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
+    public Event getEvent() {
+        return this.event;
+    }
 
 
 
@@ -71,28 +86,41 @@ public class DefaultSocketClient extends Thread implements SocketClientInterface
 
     @Override
     public void handleSession()  {
-        /*try {
+
+
+        try {
             BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
             String fromUser,inputLine;
             boolean user = true;
             boolean seeAutomobiles = false;
-            boolean receiveAutomobile = false;
+            boolean receiveEvents = false;
+            boolean receiveComments = false;
             boolean keepRunning=true;
             while(keepRunning){
-                if(receiveAutomobile){
-                    Automobile a = (Automobile) this.reader.readObject();
-                    configureForUser(a);
-                    receiveAutomobile = false;
+                if(receiveEvents){
+
+                    receiveEvents = false;
                     this.writer.writeUTF("Great thanks");
                     this.writer.flush();
                 }
+
+                else if(receiveComments){
+
+                }
+
                 else{
                     inputLine = this.reader.readUTF();
                     System.out.println("Server--" + inputLine);
                     if(inputLine.equalsIgnoreCase("Connection Established. Enter choice")){
-                        user=true;
+                        if(this.createEvent){
+                            this.writer.writeUTF("1");
+                        }
                     }
-                    if(user){
+                    if(inputLine.equalsIgnoreCase("Send Event Object")){
+                       this.writer.writeObject(this.event);
+                        keepRunning=false;
+                    }
+                    /*if(user){
                         if(seeAutomobiles){
                             System.out.println("Choose one from the list, preceed by Send auto-");
                             seeAutomobiles=false;
@@ -122,14 +150,14 @@ public class DefaultSocketClient extends Thread implements SocketClientInterface
                     if(inputLine.equalsIgnoreCase("Automobile added")){
                         this.writer.writeUTF("Great thanks");
                         this.writer.flush();
-                    }
+                    }*/
                 }
             }
         }catch (IOException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
 
