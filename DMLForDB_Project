@@ -37,3 +37,6 @@ CONSTRAINT  EventCommentMap_CommentID_pk PRIMARY KEY (EventID,CommentID)
 
 alter table event
 add constraint Event_UserID_fk FOREIGN KEY (userID) REFERENCES AppUser (UserID);
+
+alter table event
+ADD participants Number(2) Default 1;
