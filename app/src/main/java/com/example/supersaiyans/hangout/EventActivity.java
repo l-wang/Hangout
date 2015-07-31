@@ -40,6 +40,7 @@ public class EventActivity extends ActionBarActivity {
     }
 
     public void showEventDetails(View view){
+
         Intent intent = new Intent(this,ShowEventActivity.class);
         startActivity(intent);
     }
