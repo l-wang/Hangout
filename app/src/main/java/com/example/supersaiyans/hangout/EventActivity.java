@@ -49,7 +49,8 @@ public class EventActivity extends ActionBarActivity {
         String time = "31-Aug-2015";
         Event e = new Event("test",1,d,1,time);
         ClientAdapter ca = new ClientAdapter();
-        ca.createEvent(e);
+        //ca.createEvent(e);
+        ca.getAllEvents();
         Intent intent = new Intent(this,ShowEventActivity.class);
         startActivity(intent);
     }

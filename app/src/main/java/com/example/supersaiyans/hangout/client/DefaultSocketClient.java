@@ -3,7 +3,9 @@ package com.example.supersaiyans.hangout.client;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.supersaiyans.hangout.model.Comment;
 import com.example.supersaiyans.hangout.model.Event;
+import com.example.supersaiyans.hangout.model.User;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,7 +24,14 @@ public class DefaultSocketClient extends AsyncTask<Void,Void,Void> implements So
     private String strHost;
     private int iPort;
     boolean createEvent;
+    boolean joinEvent=false;
     Event event;
+    private int eventID;
+    private int userID;
+    Comment comment;
+    boolean addComment=false;
+    User user;
+    boolean addUser=false;
 
 
     public DefaultSocketClient(String strHost, int iPort) {
@@ -62,7 +71,57 @@ public class DefaultSocketClient extends AsyncTask<Void,Void,Void> implements So
         return this.event;
     }
 
+    public void setJoineEvent(boolean value) {
+        this.joinEvent = value;
+    }
 
+    public int getEventID() {
+        return eventID;
+    }
+
+    public void setEventID(int eventID) {
+        this.eventID = eventID;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public boolean isAddComment() {
+        return addComment;
+    }
+
+    public void setAddComment(boolean addComment) {
+        this.addComment = addComment;
+    }
+
+    public Comment getComment() {
+        return comment;
+    }
+
+    public void setComment(Comment comment) {
+        this.comment = comment;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public boolean isAddUser() {
+        return addUser;
+    }
+
+    public void setAddUser(boolean addUser) {
+        this.addUser = addUser;
+    }
 
     @Override
     public boolean openConnection(){
@@ -121,9 +180,37 @@ public class DefaultSocketClient extends AsyncTask<Void,Void,Void> implements So
                             this.writer.writeUTF("1");
                             this.writer.flush();
                         }
+                        else if(this.joinEvent){
+                            this.writer.writeUTF("2");
+                            this.writer.flush();
+                        }
+                        else if(this.addComment){
+                            this.writer.writeUTF("3");
+                            this.writer.flush();
+                        }
+                        else if(this.addUser){
+                            this.writer.writeUTF("4");
+                            this.writer.flush();
+                        }
                     }
                     if(inputLine.equalsIgnoreCase("Send Event Object")){
                        this.writer.writeObject(this.event);
+                        keepRunning=false;
+                    }
+                    if(inputLine.equalsIgnoreCase("Send join event data")){
+                        String info = Integer.toString(eventID)+ ","+Integer.toString(userID);
+                        this.writer.writeUTF(info);
+                        this.writer.flush();
+                        keepRunning=false;
+                    }
+
+                    if(inputLine.equalsIgnoreCase("Send comment object")){
+                        this.writer.writeObject(this.comment);
+                        keepRunning=false;
+                    }
+
+                    if(inputLine.equalsIgnoreCase("Send user object")){
+                        this.writer.writeObject(this.user);
                         keepRunning=false;
                     }
                     /*if(user){
