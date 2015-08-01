@@ -8,9 +8,9 @@ import com.example.supersaiyans.hangout.model.Event;
 public class ClientAdapter {
 
     public void createEvent(Event event){
-        DefaultSocketClient ds = new DefaultSocketClient("127.0.0.1",8000);
+        DefaultSocketClient ds = new DefaultSocketClient("128.237.163.81",8001);
         ds.setCreateEvent(true);
         ds.setEvent(event);
-        ds.run();
+        ds.execute();
     }
 }

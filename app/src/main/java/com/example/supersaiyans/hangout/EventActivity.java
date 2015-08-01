@@ -9,6 +9,9 @@ import android.view.MenuItem;
 import android.*;
 import android.view.View;
 
+import com.example.supersaiyans.hangout.client.ClientAdapter;
+import com.example.supersaiyans.hangout.model.Event;
+
 public class EventActivity extends ActionBarActivity {
 
     @Override
@@ -40,7 +43,13 @@ public class EventActivity extends ActionBarActivity {
     }
 
     public void showEventDetails(View view){
-
+        Double d[] = new Double[2];
+        d[0]= 0.0d;
+        d[1]=1.1d;
+        String time = "31-Aug-2015";
+        Event e = new Event("test",1,d,1,time);
+        ClientAdapter ca = new ClientAdapter();
+        ca.createEvent(e);
         Intent intent = new Intent(this,ShowEventActivity.class);
         startActivity(intent);
     }

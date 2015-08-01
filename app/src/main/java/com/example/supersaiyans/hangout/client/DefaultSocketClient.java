@@ -1,5 +1,8 @@
 package com.example.supersaiyans.hangout.client;
 
+import android.os.AsyncTask;
+import android.util.Log;
+
 import com.example.supersaiyans.hangout.model.Event;
 
 import java.io.BufferedReader;
@@ -12,7 +15,7 @@ import java.net.Socket;
 /**
  * Created by Chetan on 7/31/2015.
  */
-public class DefaultSocketClient extends Thread implements SocketClientInterface, SocketClientConstant {
+public class DefaultSocketClient extends AsyncTask<Void,Void,Void> implements SocketClientInterface, SocketClientConstant {
     private ObjectInputStream reader;
     private ObjectOutputStream writer;
     private Socket socket;
@@ -67,7 +70,8 @@ public class DefaultSocketClient extends Thread implements SocketClientInterface
             this.socket = new Socket(strHost, iPort);
         }
         catch(IOException socketError){socketError.printStackTrace();
-            if (DEBUG) System.err.println("Unable to connect to " + strHost);
+            //if (DEBUG) System.err.println("Unable to connect to " + strHost);
+            Log.d("Error","ConnError"+"Unable to connect to " + strHost);
             return false;
         }
         try {
@@ -110,10 +114,12 @@ public class DefaultSocketClient extends Thread implements SocketClientInterface
 
                 else{
                     inputLine = this.reader.readUTF();
-                    System.out.println("Server--" + inputLine);
+                    Log.d("Socket talking","Socketsss" + inputLine);
+                    //System.out.println("Server--" + inputLine);
                     if(inputLine.equalsIgnoreCase("Connection Established. Enter choice")){
                         if(this.createEvent){
                             this.writer.writeUTF("1");
+                            this.writer.flush();
                         }
                     }
                     if(inputLine.equalsIgnoreCase("Send Event Object")){
@@ -175,10 +181,18 @@ public class DefaultSocketClient extends Thread implements SocketClientInterface
         }
     }
 
-    public void run(){
+  /*  public void run(){
         if (openConnection()){
             handleSession();
             closeSession();
         }
+    }*/
+
+    protected Void doInBackground(Void... arg0) {
+        if (openConnection()){
+            handleSession();
+            closeSession();
+        }
+        return null;
     }
 }
