@@ -2,8 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.supersaiyans.hangout" >
 
-    <!-- Facebook-->
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- Facebook -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-library android:name="com.google.android.maps" />
 
     <application
         android:allowBackup="true"
@@ -11,15 +13,20 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
 
-        <!-- Facebook-->
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
-        <activity android:name="com.facebook.FacebookActivity"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:label="@string/app_name" />
-        <provider android:authorities="com.facebook.app.FacebookContentProvider474167099417747"
+        <!-- Facebook -->
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <provider
             android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider474167099417747"
             android:exported="true" />
 
         <activity
@@ -66,8 +73,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBvuB8uqBpqQh0VDoaf8_bKWuFjpKna0sU"/>
-
+            android:value="AIzaSyBvuB8uqBpqQh0VDoaf8_bKWuFjpKna0sU" />
     </application>
 
 </manifest>
