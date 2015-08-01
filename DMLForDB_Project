@@ -40,3 +40,11 @@ add constraint Event_UserID_fk FOREIGN KEY (userID) REFERENCES AppUser (UserID);
 
 alter table event
 ADD participants Number(2) Default 1;
+
+create table EventUserMap
+(EventID Number(5)
+CONSTRAINT 	EventUserMap_EventID_fk REFERENCES Event (EventID),
+userID Number(5)
+CONSTRAINT 	EventUserMap_userID_fk REFERENCES AppUser (userID),
+CONSTRAINT  EventUserMap_userID_eventid_pk PRIMARY KEY (EventID,userID)
+);
