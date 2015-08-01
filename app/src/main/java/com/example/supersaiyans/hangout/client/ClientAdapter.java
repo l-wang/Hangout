@@ -47,9 +47,35 @@ public class ClientAdapter {
         ArrayList<Event> eventList=null;
         try{
             eventList = ds.execute().get();
+            if(eventList!=null){
+                Log.d("YaySuccess" + eventList.iterator().next().getID(),"yessssssssss");
+            }
+            else{
+                Log.d("YayFailure" ,"nooooooooooooooo");
+            }
+
         }catch (Exception e){
             Log.d("ChetanErrorrrrrrrrrrrrr",e.toString());
         }
         return eventList;
+    }
+
+    public ArrayList<Comment> getAllComments(int eventID) {
+        DefaultSocketClientToGetComments ds = new DefaultSocketClientToGetComments("128.237.163.81",8001);
+        ds.setEventID(eventID);
+        ArrayList<Comment> commentList=null;
+        try{
+            commentList = ds.execute().get();
+            if(commentList!=null){
+                Log.d("YaySuccess" + commentList.iterator().next().getCommentID(),"yessssssssss");
+            }
+            else{
+                Log.d("YayFailure" ,"nooooooooooooooo");
+            }
+
+        }catch (Exception e){
+            Log.d("ChetanErrorrrrrrrrrrrrr",e.toString());
+        }
+        return commentList;
     }
 }
