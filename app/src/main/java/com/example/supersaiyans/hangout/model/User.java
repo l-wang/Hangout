@@ -1,14 +1,16 @@
 package com.example.supersaiyans.hangout.model;
 
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private int ID;
     private String name;
     private Double[] location;
     private String email;
     private int[] events[];
 
-    public User(int ID, String name, Double[] location, String email) {
+    public User(int ID, String name, Double[] location) {
         this.ID = ID;
         this.name = name;
         this.location = location;
@@ -54,5 +56,6 @@ public class User {
     public void setEvents(int[][] events) {
         this.events = events;
     }
+
 }
 

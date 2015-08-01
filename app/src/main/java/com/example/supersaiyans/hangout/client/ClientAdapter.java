@@ -13,4 +13,6 @@ public class ClientAdapter {
         ds.setEvent(event);
         ds.execute();
     }
+
+    //public void joinEvent()
 }
