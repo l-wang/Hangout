@@ -1,9 +1,8 @@
 package com.example.supersaiyans.hangout.model;
 
-
 import java.io.Serializable;
 
-public class Event implements Serializable{
+public class Event implements Serializable {
     private String name;
     private int ID;
     private Double[] location;
@@ -12,6 +11,7 @@ public class Event implements Serializable{
     private int participants;
     private String time;
 
+    static final long serialVersionUID = 43L;
 
     public Event(String name, int ID, Double[] location, int organizer,String time) {
         this.name = name;
@@ -84,4 +84,3 @@ public class Event implements Serializable{
         this.time = time;
     }
 }
-
