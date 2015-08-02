@@ -101,7 +101,7 @@ public class ClientAdapter {
     }
 
     public User checkUser (int userID) {
-        DefaultSocketClientToGetUsers ds = new DefaultSocketClientToGetUsers("128.237.163.81", 8001);
+        DefaultSocketClientToGetUsers ds = new DefaultSocketClientToGetUsers("128.237.163.81", 8003);
         ds.setUserID(userID);
         try {
             User u = ds.execute().get();
