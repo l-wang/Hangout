@@ -24,12 +24,6 @@
         android:textStyle="bold"
         android:onClick="login" />
 
-    <Button android:id="@+id/email_sign_in_fb_button" style="?android:textAppearanceSmall"
-        android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:layout_marginTop="16dp" android:text="@string/action_sign_in_fb"
-        android:textStyle="bold"
-        android:onClick="login" />
-
     <Button android:id="@+id/email_sign_up_button" style="?android:textAppearanceSmall"
         android:layout_width="match_parent" android:layout_height="wrap_content"
         android:layout_marginTop="16dp" android:text="@string/action_sign_up"
@@ -47,7 +41,7 @@
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         />

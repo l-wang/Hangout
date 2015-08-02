@@ -14,16 +14,20 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.supersaiyans.hangout.client.ClientAdapter;
+import com.example.supersaiyans.hangout.model.User;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
+import com.facebook.GraphRequestBatch;
 import com.facebook.GraphResponse;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 
@@ -34,6 +38,7 @@ public class MyLoginActivity extends Activity {
     private TextView info;
     private LoginButton loginButton;
     private CallbackManager callbackManager;
+    private User user;
     //
 
     @Override
@@ -50,29 +55,66 @@ public class MyLoginActivity extends Activity {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-//                info.setText(
-//                        "User ID: "
-//                                + loginResult.getAccessToken().getUserId()
-//                                + "\n" +
-//                                "Auth Token: "
-//                                + loginResult.getAccessToken().getToken()
-//                );
+                String fbId = loginResult.getAccessToken().getUserId();
+                int userId = generateUId(fbId);
+                ClientAdapter adapter = new ClientAdapter();
+                User user = adapter.checkUser(1); //getUser(userId) User user = User object fetched from server
 
-                GraphRequest request = GraphRequest.newMeRequest(
-                        loginResult.getAccessToken(),
-                        new GraphRequest.GraphJSONObjectCallback() {
-                            @Override
-                            public void onCompleted(
-                                    JSONObject object,
-                                    GraphResponse response) {
+                if (user != null) {
+                    Log.d("MyLoginActivity", user.toString());
+                    Bundle b = new Bundle();
+                    b.putSerializable("user", user);
 
-                                Log.v("LoginActivity", response.toString());
-                            }
-                        });
+                    Intent intent = new Intent(MyLoginActivity.this, MyHomeActivity.class);
+                    intent.putExtras(b);
+                    startActivity(intent);
 
-                Bundle parameters = new Bundle();
-                parameters.putString("fields", "id, name, email, gender, birthday");
-                request.executeAsync();
+                } else {
+                    Log.d("MyLoginActivity", "User was null");
+                    GraphRequest request = GraphRequest.newMeRequest(
+                            loginResult.getAccessToken(),
+                            new GraphRequest.GraphJSONObjectCallback() {
+                                @Override
+                                public void onCompleted(
+                                        JSONObject object,
+                                        GraphResponse response) {
+                                    // Application code
+                                    //Log.v("LoginActivity", response.toString());
+                                    try {
+                                        JSONObject jObj = new JSONObject(object.toString());
+                                        String fbId = jObj.getString("id");
+                                        String name = jObj.getString("name");
+                                        int userId = generateUId(fbId);
+
+                                        User user = new User(userId, fbId, name);
+
+                                        // create user in server
+                                        ClientAdapter adapter = new ClientAdapter();
+                                        adapter.createUser(user);
+
+                                        Log.d("MyLoginActivity", user.toString());
+                                        info.setText(user.toString());
+
+                                        Bundle b = new Bundle();
+                                        b.putSerializable("user", user);
+
+                                        Intent intent = new Intent(MyLoginActivity.this, MyHomeActivity.class);
+                                        intent.putExtras(b);
+                                        startActivity(intent);
+
+                                    } catch(Exception JsonException) {
+                                        Log.d("LoginActivity", "Exception: Not a JSon Object");
+                                    }
+
+
+                                }
+                            });
+                    Bundle parameters = new Bundle();
+                    parameters.putString("fields", "id, name");
+                    request.setParameters(parameters);
+                    request.executeAsync();
+                }
+
             }
 
             @Override
@@ -131,6 +173,10 @@ public class MyLoginActivity extends Activity {
 
         // Logs 'install' and 'app activate' App Events.
         AppEventsLogger.activateApp(this);
+    }
+
+    private int generateUId(String fbId) {
+        return Integer.parseInt(fbId.substring(fbId.length() - 5));
     }
 }
 

@@ -9,13 +9,25 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.supersaiyans.hangout.model.User;
+
+import java.util.List;
+
 
 public class MyHomeActivity extends Activity {
+
+    private TextView userInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_home); //
+        userInfo = (TextView)findViewById(R.id.userInfo);
+
+        Intent in = getIntent();
+        Bundle b = in.getExtras();
+        User user = (User)b.getSerializable("user");
+        userInfo.setText(user.toString());
 
 //        Intent intent = getIntent();
 //        String email = intent.getStringExtra(LoginActivity.EXTRA_MESSAGE);
