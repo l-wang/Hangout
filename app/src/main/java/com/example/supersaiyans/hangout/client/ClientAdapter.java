@@ -43,7 +43,7 @@ public class ClientAdapter {
     }
 
     public ArrayList<Event> getAllEvents() {
-        DefaultSocketClientToGetEvents ds = new DefaultSocketClientToGetEvents("128.237.163.81",8001);
+        DefaultSocketClientToGetEvents ds = new DefaultSocketClientToGetEvents("128.237.163.81",8004);
         ArrayList<Event> eventList=null;
         try{
             eventList = ds.execute().get();

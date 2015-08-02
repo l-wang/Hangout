@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
 import android.view.View;
-import android.widget.EditText;
 
 public class ProfileActivity extends ActionBarActivity {
 
@@ -40,18 +39,34 @@ public class ProfileActivity extends ActionBarActivity {
     }
 
 
+    /** Called when the user clicks the CREATE button */
     public void loadEvent(View view){
         Intent intent = new Intent(this,EventActivity.class);
         startActivity(intent);
     }
 
-    /** Called when the user clicks the Send button */
+    /** Called when the user clicks the ME button */
+    public void openProfile(View view) {
+        // Do something in response to button
+        Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
+    }
+
+
+    /** Called when the user clicks the MAP button */
     public void openMap(View view) {
         // Do something in response to button
-        Intent intent = new Intent(this, MapActivity.class);
+        Intent intent = new Intent(this, MapsActivity.class);
 //        EditText editText = (EditText) findViewById(R.id.edit_message);
 //        String message = editText.getText().toString();
 //        intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
+
+    /** Called when the user clicks the SEARCH button */
+    public void showEvents(View view) {
+        Intent intent = new Intent(this, ShowEventActivity.class);
+        startActivity(intent);
+    }
+
 }

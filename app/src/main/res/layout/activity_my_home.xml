@@ -8,7 +8,7 @@
         android:text="Search"
         android:id="@+id/button"
         android:layout_alignParentBottom="true"
-        android:visibility="invisible"/>
+        android:onClick="showEvents"/>
 
     <Button
         android:layout_width="wrap_content"
