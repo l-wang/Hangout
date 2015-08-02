@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.supersaiyans.hangout.client.ClientAdapter;
 import com.example.supersaiyans.hangout.model.Event;
+import com.example.supersaiyans.hangout.model.User;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -64,7 +65,7 @@ public class EventActivity extends ActionBarActivity {
         d[1]=1.1d;
         String time = "31-Aug-2015";
         Event e = new Event("test",1,d,1,time);*/
-        Random r = new Random(System.currentTimeMillis());
+      /*  Random r = new Random(System.currentTimeMillis());
         String eName = eventName.getText().toString();
         int eventID = r.nextInt(90000);
         int userID=1;
@@ -88,7 +89,16 @@ public class EventActivity extends ActionBarActivity {
         Event e = new Event(eName,eventID,location,userID,time);
         ClientAdapter ca = new ClientAdapter();
         ca.createEvent(e);
-        Toast.makeText(EventActivity.this, "Event created", Toast.LENGTH_LONG).show();
+        Toast.makeText(EventActivity.this, "Event created", Toast.LENGTH_LONG).show();*/
+        ClientAdapter ca = new ClientAdapter();
+        User user = ca.checkUser(1);
+        if(user!=null){
+            Log.d("userchkkkkkk",user.getName());
+        }
+        else{
+            Log.d("userchkkkkkkfae","");
+        }
+
         //ca.getAllEvents();
         //Intent intent = new Intent(this,ShowEventActivity.class);
         //startActivity(intent);

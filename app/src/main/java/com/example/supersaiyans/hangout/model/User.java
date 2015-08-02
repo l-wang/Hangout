@@ -10,16 +10,18 @@ public class User implements Serializable{
     private int[] events[];
     private String fb_id;
 
-    public User(int id, String fb_id, String name) {
-        this.ID = id;
-        this.fb_id = fb_id;
-        this.name = name;
-    }
+    static final long serialVersionUID = 42L;
 
     public User(int ID, String name, Double[] location) {
         this.ID = ID;
         this.name = name;
         this.location = location;
+    }
+
+    public User(int id, String fb_id, String name) {
+        this.ID = id;
+        this.fb_id = fb_id;
+        this.name = name;
     }
 
     public int getID() {
