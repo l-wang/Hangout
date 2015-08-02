@@ -39,7 +39,6 @@ public class MyLoginActivity extends Activity {
     private LoginButton loginButton;
     private CallbackManager callbackManager;
     private User user;
-    //
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

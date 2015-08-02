@@ -31,13 +31,27 @@ public class ShowEventActivity extends Activity {//don't delete any comment in t
         setContentView(R.layout.activity_show_event);
 
         ListView list = (ListView) findViewById(R.id.ListView01);
-//        Event one = new Event("event1", 1, null, 11, "001");
-//        Event two = new Event("event2", 2, null, 22, "002");
-//        events.add(one);
-//        events.add(two);
+        Event one = new Event("event1", 1, null, 11, "001");
+        Event two = new Event("event2", 2, null, 22, "002");
+        Event three = new Event("event3", 3, null, 33, "003");
+        Event four = new Event("event4", 4, null, 44, "004");
+        Event five = new Event("event5", 5, null, 55, "005");
+        Event six = new Event("event6", 6, null, 66, "006");
+        Event seven = new Event("event7", 7, null, 77, "007");
+        Event eight = new Event("event8", 8, null, 88, "008");
+        Event nine = new Event("event9", 9, null, 99, "009");
+        events.add(one);
+        events.add(two);
+        events.add(three);
+        events.add(four);
+        events.add(five);
+        events.add(six);
+        events.add(seven);
+        events.add(eight);
+        events.add(nine);
 
 
-        events = clientAdapter.getAllEvents();
+//        events = clientAdapter.getAllEvents();
 
         //create arraylist and add data
         ArrayList<HashMap<String, Object>> listItem = new ArrayList<>();
