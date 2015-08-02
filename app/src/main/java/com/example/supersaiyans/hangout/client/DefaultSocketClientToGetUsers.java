@@ -3,7 +3,6 @@ package com.example.supersaiyans.hangout.client;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.supersaiyans.hangout.model.Comment;
 import com.example.supersaiyans.hangout.model.Event;
 import com.example.supersaiyans.hangout.model.User;
 
@@ -18,18 +17,18 @@ import java.util.ArrayList;
 /**
  * Created by Chetan on 7/31/2015.
  */
-public class DefaultSocketClientToGetEvents extends AsyncTask<Void,Void,ArrayList<Event>> implements SocketClientInterface, SocketClientConstant {
+public class DefaultSocketClientToGetUsers extends AsyncTask<Void,Void,User> implements SocketClientInterface, SocketClientConstant {
     private ObjectInputStream reader;
     private ObjectOutputStream writer;
     private Socket socket;
     private String strHost;
     private int iPort;
     ArrayList<Event> eventList;
-    boolean getEventsBasedONID=false;
-    int userID;
+    private int userID;
+    User user;
 
 
-    public DefaultSocketClientToGetEvents(Socket socket) {
+    public DefaultSocketClientToGetUsers(Socket socket) {
         this.socket=socket;
     }
 
@@ -49,6 +48,13 @@ public class DefaultSocketClientToGetEvents extends AsyncTask<Void,Void,ArrayLis
         this.iPort = iPort;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
     public int getUserID() {
         return userID;
     }
@@ -57,15 +63,8 @@ public class DefaultSocketClientToGetEvents extends AsyncTask<Void,Void,ArrayLis
         this.userID = userID;
     }
 
-    public boolean isGetEventsBasedONID() {
-        return getEventsBasedONID;
-    }
 
-    public void setGetEventsBasedONID(boolean getEventsBasedONID) {
-        this.getEventsBasedONID = getEventsBasedONID;
-    }
-
-    public DefaultSocketClientToGetEvents(String strHost, int iPort) {
+    public DefaultSocketClientToGetUsers(String strHost, int iPort) {
         setiPort (iPort);
         setStrHost (strHost);
     }
@@ -104,15 +103,14 @@ public class DefaultSocketClientToGetEvents extends AsyncTask<Void,Void,ArrayLis
             String fromUser,inputLine;
             boolean user = true;
             boolean seeAutomobiles = false;
-            boolean receiveEvents = false;
+            boolean receiveUser = false;
             boolean receiveComments = false;
             boolean keepRunning=true;
             while(keepRunning){
-                if(receiveEvents){
+                if(receiveUser){
                     //
-                    ArrayList<Event> listEvents = (ArrayList<Event>)reader.readObject();
-                    this.eventList=listEvents;
-                    receiveEvents = false;
+                    this.user= (User)this.reader.readObject();
+                    receiveUser = false;
                     keepRunning=false;
                 }
 
@@ -122,23 +120,15 @@ public class DefaultSocketClientToGetEvents extends AsyncTask<Void,Void,ArrayLis
                     Log.d("Socket talking","Socketsss" + inputLine);
                     //System.out.println("Server--" + inputLine);
                     if(inputLine.equalsIgnoreCase("Connection Established. Enter choice")){
-                        if(getEventsBasedONID){
-                            this.writer.writeUTF("7");
+                            this.writer.writeUTF("8");
                             this.writer.flush();
                             //receiveEvents=true;
-                        }
-                        else{
-                            this.writer.writeUTF("5");
-                            this.writer.flush();
-                            receiveEvents=true;
-                        }
-
                     }
 
                     else if(inputLine.equalsIgnoreCase("Send user id")){
                         this.writer.writeUTF(Integer.toString(this.userID));
                         this.writer.flush();
-                        receiveEvents=true;
+                        receiveUser=true;
                     }
                 }
             }
@@ -171,12 +161,12 @@ public class DefaultSocketClientToGetEvents extends AsyncTask<Void,Void,ArrayLis
         }
     }*/
 
-    protected ArrayList<Event> doInBackground(Void... arg0) {
+    protected User doInBackground(Void... arg0) {
         if (openConnection()){
             handleSession();
             closeSession();
         }
-        return eventList;
+        return user;
     }
 
 

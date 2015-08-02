@@ -78,4 +78,45 @@ public class ClientAdapter {
         }
         return commentList;
     }
+
+    public ArrayList<Event> getUserEvents(int userID) {
+        DefaultSocketClientToGetEvents ds = new DefaultSocketClientToGetEvents("128.237.163.81",8001);
+        ds.setGetEventsBasedONID(true);
+        //ds.setUserID(userID);
+        ds.setUserID(1);
+        ArrayList<Event> eventList=null;
+        try{
+            eventList = ds.execute().get();
+            if(eventList!=null){
+                Log.d("YaySuccess" + eventList.iterator().next().getID(),"yessssssssss");
+            }
+            else{
+                Log.d("YayFailure" ,"nooooooooooooooo");
+            }
+
+        }catch (Exception e){
+            Log.d("ChetanErrorrrrrrrrrrrrr",e.toString());
+        }
+        return eventList;
+    }
+
+    public User checkUser (int userID) {
+        DefaultSocketClientToGetUsers ds = new DefaultSocketClientToGetUsers("128.237.163.81", 8001);
+        ds.setUserID(userID);
+        try {
+            User u = ds.execute().get();
+            if (u != null) {
+                Log.d("YaySuccess" + u.getID(), "yessssssssss");
+                return u;
+            } else {
+                Log.d("YayFailure", "nooooooooooooooo");
+                return null;
+            }
+
+        } catch (Exception e) {
+            Log.d("ChetanErrorrrrrrrrrrrrr", e.toString());
+
+        }
+        return null;
+    }
 }
