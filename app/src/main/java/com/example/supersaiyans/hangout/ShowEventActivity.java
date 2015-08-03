@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -15,15 +17,19 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.supersaiyans.hangout.client.ClientAdapter;
 import com.example.supersaiyans.hangout.model.Event;
 
 public class ShowEventActivity extends Activity {//don't delete any comment in this file
 
+//    private static final String TAG = "ContextMenu";
+
     private ClientAdapter clientAdapter = new ClientAdapter();
     private  ArrayList<Event> events = new ArrayList<>();
-
+    private String eventName;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,36 +81,102 @@ public class ShowEventActivity extends Activity {//don't delete any comment in t
         // 生成适配器的Item和动态数组对应的元素
         SimpleAdapter listItemAdapter = new SimpleAdapter(this, listItem,//data
                 R.layout.list_items,//ListItem XML
-                new String[] {"ItemImage", "ItemTitle", "ItemText"},//动态数组与ImageItem对应的子项
-                new int[] {R.id.ItemImage, R.id.ItemTitle, R.id.ItemText}//ImageItem的XML文件里面的一个ImageView,两个TextView ID
+//                new String[] {"ItemImage", "ItemTitle", "ItemText"},//动态数组与ImageItem对应的子项
+//                new int[] {R.id.ItemImage, R.id.ItemTitle, R.id.ItemText}//ImageItem的XML文件里面的一个ImageView,两个TextView ID
+                new String[] {"ItemTitle", "ItemText"},
+                new int[] {R.id.ItemTitle, R.id.ItemText}
         );
 
         //add and show
         list.setAdapter(listItemAdapter);
 
+        list.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                setTitle("click #" + arg2 + "item");
+                String mytitle = null;
+                String mycontent = null;
 
-//        list.setOnItemClickListener(new OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-//                setTitle("click #" + arg2 + "item");
-//            }
-//        });
+                switch(arg0.getId())
+                {
+                    case R.id.ListView01:
+                        ListView templist = (ListView)arg0;
+                        View mView = templist.getChildAt(arg2);
+
+                        TextView textViewTitle = (TextView) mView.findViewById(R.id.ItemTitle);
+                        mytitle = textViewTitle.getText().toString();
+
+//                        mysqlhelper.db = mysqlhelper.mOpenHelper.getReadableDatabase();
+//                        Cursor cur = mysqlhelper.db.rawQuery("select Content from Table_1 where Title = ?",new String[]{mytitle});
+//                        int count = cur.getCount();
+//                        cur.moveToFirst();
+//                        mycontent = cur.getString(0);
+                        TextView textViewText = (TextView) mView.findViewById(R.id.ItemText);
+                        mycontent = textViewText.getText().toString();
+
+
+//                                 cur.close();
+//                        mysqlhelper.db.close();
+
+                        Intent intent = new Intent(ShowEventActivity.this, EventDetailsActivity.class);
+                        intent.putExtra("Title", mytitle);
+                        intent.putExtra("Content", mycontent);
+                        setResult(2, intent);
+                        Toast.makeText(ShowEventActivity.this, "send event info to eventdetails", Toast.LENGTH_LONG).show();
+                        finish();
+                        startActivityForResult(intent, 2);
+                        break;
+                }
+            }
+        });
 
         //long-press
-//        list.setOnCreateContextMenuListener(new OnCreateContextMenuListener() {
-//            @Override
-//            public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-//                menu.setHeaderTitle("long-press menu-ContextMenu");
-//                menu.add(0, 0, 0, "pop up long-press menu 0");
+        list.setOnCreateContextMenuListener(new OnCreateContextMenuListener() {
+            @Override
+            public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+                menu.setHeaderTitle("long-click events operations: ");
+                menu.add(0, 0, Menu.NONE, "WANNA SEE Event Details ?");
+                menu.add(0, 1, Menu.NONE, "more operations TO BE ADDED !!!");
 //                menu.add(0, 1, 0, "pop up long-press menu 1");
-//            }
-//        });
+
+            }
+        });
     }
 
     //long-press response
-//    @Override
-//    public boolean onContextItemSelected(MenuItem item) {
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
 //        setTitle("in long-press menu you clicked #" + item.getItemId() + "item");
-//        return super.onContextItemSelected(item);
-//    }
+        Bundle b = new Bundle();
+        b.putString(Integer.toString(R.id.ItemTitle), eventName);
+        Intent intent = new Intent(ShowEventActivity.this, EventDetailsActivity.class);
+        intent.putExtras(b);
+        startActivity(intent);
+        return super.onContextItemSelected(item);
+
+        // 得到当前被选中的item信息
+//        AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+//        final Map<String, String> map = (HashMap) lv.getItemAtPosition(selectedPosition);
+
+//        Log.v(TAG, "ID = " + menuInfo.id);
+
+//        switch(item.getItemId()) {
+//
+//            case 0:
+//                item.setIntent(new Intent(ShowEventActivity.this, EventDetailsActivity.class));
+//                break;
+//
+//            case 1:
+//                // delete this event on the listview and in db
+//
+//                break;
+//
+//            default:
+//
+//                return super.onContextItemSelected(item);
+//
+//        }
+//
+//        return true;
+    }
 }

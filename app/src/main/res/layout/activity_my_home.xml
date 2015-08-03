@@ -5,6 +5,7 @@
     android:id="@+id/linearlayoutmyhome"
     android:gravity="clip_vertical">
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,10 +25,11 @@
 
     <ExpandableListView
         android:layout_width="wrap_content"
-        android:layout_height="350dp"
         android:id="@+id/expandableListView"
-        android:layout_marginTop="67dp"
-        android:choiceMode="multipleChoice" />
+        android:layout_marginTop="10dp"
+        android:choiceMode="multipleChoice"
+        android:layout_height="0px"
+        android:layout_weight="1"/>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools" android:orientation="horizontal"

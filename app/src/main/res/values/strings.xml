@@ -48,14 +48,12 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
-
-
-
     <!--strings related to profile-->
     <string name="user_name">Alex Wang</string>
     <string name="search">search</string>
     <string name="create">create</string>
     <string name="map">map</string>
     <string name="profile">me</string>
+    <string name="title_activity_event_details">EventDetailsActivity</string>
 
 </resources>

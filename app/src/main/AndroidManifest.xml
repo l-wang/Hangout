@@ -80,9 +80,14 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <!-- <activity -->
+        <!-- android:name=".EventDetailsActivity" -->
+        <!-- android:label="@string/title_activity_event_details" > -->
+        <!-- </activity> -->
+
         <activity
-            android:name=".EventDetailActivity"
-            android:label="@string/title_activity_event_detail" >
+            android:name=".EventDetailsActivity"
+            android:label="@string/title_activity_event_details" >
         </activity>
     </application>
 
