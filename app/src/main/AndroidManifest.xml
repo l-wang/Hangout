@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.supersaiyans.hangout" >
 
     <!-- Facebook -->
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
-    <!-- The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
-         Google Maps Android API v2, but are recommended. -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but are recommended.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <uses-library android:name="com.google.android.maps" />
 
     <application
@@ -37,46 +39,51 @@
             android:exported="true" />
 
         <activity
-            android:name="com.example.supersaiyans.hangout.MyLoginActivity"
+            android:name=".MyLoginActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.supersaiyans.hangout.MyHomeActivity"
+            android:name=".MyHomeActivity"
             android:label="@string/title_activity_my_home"
-            android:parentActivityName="com.example.supersaiyans.hangout.MyLoginActivity" >
+            android:parentActivityName=".MyLoginActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.supersaiyans.hangout.MyLoginActivity" />
         </activity>
         <activity
-            android:name="com.example.supersaiyans.hangout.RegisterActivity"
+            android:name=".RegisterActivity"
             android:label="@string/title_activity_register" >
         </activity>
         <activity
-            android:name="com.example.supersaiyans.hangout.EventActivity"
+            android:name=".EventActivity"
             android:label="@string/title_activity_event" >
         </activity>
         <activity
-            android:name="com.example.supersaiyans.hangout.ShowEventActivity"
+            android:name=".ShowEventActivity"
             android:label="@string/title_activity_show_event" >
         </activity>
         <activity
-            android:name="com.example.supersaiyans.hangout.ProfileActivity"
+            android:name=".ProfileActivity"
             android:label="@string/title_activity_profile" >
         </activity>
-
-        <activity android:name="com.example.supersaiyans.hangout.MapsActivity"
-            android:label="@string/title_activity_maps">
-
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps" >
         </activity>
-        <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="@string/google_maps_key"/>
 
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".EventDetailActivity"
+            android:label="@string/title_activity_event_detail" >
+        </activity>
     </application>
 
 </manifest>
-
-
