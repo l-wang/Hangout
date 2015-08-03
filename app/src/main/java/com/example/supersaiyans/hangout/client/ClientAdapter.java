@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.supersaiyans.hangout.model.Comment;
 import com.example.supersaiyans.hangout.model.Event;
 import com.example.supersaiyans.hangout.model.User;
+import com.example.supersaiyans.hangout.resource.ClientResource;
 
 import java.util.ArrayList;
 
@@ -14,14 +15,14 @@ import java.util.ArrayList;
 public class ClientAdapter {
 
     public void createEvent(Event event){
-        DefaultSocketClient ds = new DefaultSocketClient("128.237.163.81",8001);
+        DefaultSocketClient ds = new DefaultSocketClient(ClientResource.ip,ClientResource.port);
         ds.setCreateEvent(true);
         ds.setEvent(event);
         ds.execute();
     }
 
     public void joinEvent(int eventID, int userID){
-        DefaultSocketClient ds = new DefaultSocketClient("128.237.163.81",8001);
+        DefaultSocketClient ds = new DefaultSocketClient(ClientResource.ip,ClientResource.port);
         ds.setJoineEvent(true);
         ds.setEventID(eventID);
         ds.setUserID(userID);
@@ -29,21 +30,21 @@ public class ClientAdapter {
     }
 
     public void addComment(Comment comment){
-        DefaultSocketClient ds = new DefaultSocketClient("128.237.163.81",8001);
+        DefaultSocketClient ds = new DefaultSocketClient(ClientResource.ip,ClientResource.port);
         ds.setAddComment(true);
         ds.setComment(comment);
         ds.execute();
     }
 
     public void createUser(User user){
-        DefaultSocketClient ds = new DefaultSocketClient("128.237.163.81",8001);
+        DefaultSocketClient ds = new DefaultSocketClient(ClientResource.ip,ClientResource.port);
         ds.setAddUser(true);
         ds.setUser(user);
         ds.execute();
     }
 
     public ArrayList<Event> getAllEvents() {
-        DefaultSocketClientToGetEvents ds = new DefaultSocketClientToGetEvents("128.237.163.81",8004);
+        DefaultSocketClientToGetEvents ds = new DefaultSocketClientToGetEvents(ClientResource.ip,ClientResource.port);
         ArrayList<Event> eventList=null;
         try{
             eventList = ds.execute().get();
@@ -61,7 +62,7 @@ public class ClientAdapter {
     }
 
     public ArrayList<Comment> getAllComments(int eventID) {
-        DefaultSocketClientToGetComments ds = new DefaultSocketClientToGetComments("128.237.163.81",8001);
+        DefaultSocketClientToGetComments ds = new DefaultSocketClientToGetComments(ClientResource.ip,ClientResource.port);
         ds.setEventID(eventID);
         ArrayList<Comment> commentList=null;
         try{
@@ -80,7 +81,7 @@ public class ClientAdapter {
     }
 
     public ArrayList<Event> getUserEvents(int userID) {
-        DefaultSocketClientToGetEvents ds = new DefaultSocketClientToGetEvents("128.237.163.81",8001);
+        DefaultSocketClientToGetEvents ds = new DefaultSocketClientToGetEvents(ClientResource.ip,ClientResource.port);
         ds.setGetEventsBasedONID(true);
         //ds.setUserID(userID);
         ds.setUserID(1);
@@ -101,7 +102,7 @@ public class ClientAdapter {
     }
 
     public User checkUser (int userID) {
-        DefaultSocketClientToGetUsers ds = new DefaultSocketClientToGetUsers("128.237.163.81", 8004);
+        DefaultSocketClientToGetUsers ds = new DefaultSocketClientToGetUsers(ClientResource.ip,ClientResource.port);
         ds.setUserID(userID);
         try {
             User u = ds.execute().get();
