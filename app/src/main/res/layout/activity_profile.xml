@@ -158,7 +158,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:text="Search"
+            android:text="@string/search"
             android:id="@+id/button"
             android:onClick="showEvents"/>
         <!--android:layout_alignParentBottom="true"-->
@@ -167,7 +167,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:text="Create"
+            android:text="@string/create"
             android:id="@+id/button2"
             android:onClick="loadEvent" />
         <!--android:layout_alignTop="@+id/button"-->
@@ -176,7 +176,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:text="Map"
+            android:text="@string/map"
             android:id="@+id/button3"
             android:onClick="openMap"/>
         <!--android:layout_alignTop="@+id/button2"-->
@@ -185,7 +185,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:text="ME"
+            android:text="@string/profile"
             android:id="@+id/button4"/>
         <!--android:layout_alignTop="@+id/button3"-->
         <!--android:layout_toEndOf="@+id/button3"-->

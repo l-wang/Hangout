@@ -1,5 +1,7 @@
 package com.example.supersaiyans.hangout;
 
+import android.content.Context;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -66,12 +68,53 @@ public class MapsActivity extends FragmentActivity {
      */
     private void setUpMap() {
         locationMgr = (LocationManager) this.getSystemService(LOCATION_SERVICE);
-        locationMgr = (LocationManager) this.getSystemService(LOCATION_SERVICE);
-        Location location = locationMgr.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        double lat = location.getLatitude();
-        double longitude = location.getLongitude();
 
-        mMap.addMarker(new MarkerOptions().position(new LatLng(lat, longitude)).title("Marker"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(lat, longitude)));
+        Location location = locationMgr.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        try {                        //DON'T USE GPS_PROVIDER! I spent whole night to debug this.WTF
+            double lat = location.getLatitude();
+            double longitude = location.getLongitude();
+            mMap.addMarker(new MarkerOptions().position(new LatLng(lat, longitude)).title("Marker"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(lat, longitude)));
+        } catch (Exception e) {
+
+        }
     }
+//    }
+//    private void setUpMap() {
+////        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker").snippet("Snippet"));
+//
+//        // Enable MyLocation Layer of Google Map
+//        mMap.setMyLocationEnabled(true);
+//
+//        // Get LocationManager object from System Service LOCATION_SERVICE
+//        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//
+//        // Create a criteria object to retrieve provider
+//        Criteria criteria = new Criteria();
+//
+//        // Get the name of the best provider
+//        String provider = locationManager.getBestProvider(criteria, true);
+//
+//        // Get Current Location
+//        Location myLocation = locationManager.getLastKnownLocation(provider);
+//
+//        // set map type
+//        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+//
+//        // Get latitude of the current location
+//        double latitude = myLocation.getLatitude();
+//
+//        // Get longitude of the current location
+//        double longitude = myLocation.getLongitude();
+//
+//        // Create a LatLng object for the current location
+//        LatLng latLng = new LatLng(latitude, longitude);
+//
+//        // Show the current location in Google Map
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+//
+//        // Zoom in the Google Map
+//        mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
+//        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("You are here!").snippet("Consider yourself located"));
+//    }
 }

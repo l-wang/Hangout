@@ -13,6 +13,7 @@ import android.widget.SimpleAdapter;
 
 import com.example.supersaiyans.hangout.client.ClientAdapter;
 import com.example.supersaiyans.hangout.model.Event;
+import com.example.supersaiyans.hangout.model.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,12 +21,14 @@ import java.util.HashMap;
 public class ProfileActivity extends Activity {
 
     private ClientAdapter clientAdapter = new ClientAdapter();
-    private ArrayList<Event> eventss = new ArrayList<>();
-
+    private ArrayList<Event> events = new ArrayList<>();
+    private User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+//        Double[] loctn3 = new Double[]{30.23423223, 117.00322};
 
         ListView list = (ListView) findViewById(R.id.ListView02);
         Event one = new Event("event1", 1, null, 11, "001");
@@ -37,23 +40,23 @@ public class ProfileActivity extends Activity {
         Event seven = new Event("event7", 7, null, 77, "007");
         Event eight = new Event("event8", 8, null, 88, "008");
         Event nine = new Event("event9", 9, null, 99, "009");
-        eventss.add(one);
-        eventss.add(two);
-        eventss.add(three);
-        eventss.add(four);
-        eventss.add(five);
-        eventss.add(six);
-        eventss.add(seven);
-        eventss.add(eight);
-        eventss.add(nine);
+        events.add(one);
+        events.add(two);
+        events.add(three);
+        events.add(four);
+        events.add(five);
+        events.add(six);
+        events.add(seven);
+        events.add(eight);
+        events.add(nine);
 
-
-//        events = clientAdapter.getAllEvents();
+//        user = new User(3, "event3", loctn3);
+//        events = clientAdapter.getUserEvents(user.getID());
 
         //create arraylist and add data
         ArrayList<HashMap<String, Object>> listItem = new ArrayList<>();
 
-        for (Event ev : eventss) {
+        for (Event ev : events) {
             HashMap<String, Object> map = new HashMap<>();
             map.put("ItemTitle", ev.getTime());
             map.put("ItemText", ev.getName());

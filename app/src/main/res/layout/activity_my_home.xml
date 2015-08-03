@@ -1,68 +1,78 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Search"
-        android:id="@+id/button"
-        android:layout_alignParentBottom="true"
-        android:onClick="showEvents"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create"
-        android:id="@+id/button2"
-        android:layout_alignTop="@+id/button"
-        android:layout_toEndOf="@+id/button"
-        android:onClick="loadEvent"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Map"
-        android:id="@+id/button3"
-        android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/button2"
-        android:onClick="openMap" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ME"
-        android:id="@+id/button4"
-        android:layout_alignTop="@+id/button3"
-        android:layout_toEndOf="@+id/button3"
-        android:onClick="openProfile" />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    tools:context="com.example.supersaiyans.hangout.myhome"
+    android:id="@+id/linearlayoutmyhome"
+    android:gravity="clip_vertical">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Recommended"
-        android:id="@+id/textView"
-        android:layout_alignParentTop="true"
-        android:layout_alignEnd="@+id/button2" />
+        android:id="@+id/textView"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/userInfo"
+        android:textSize="18sp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:textSize="18sp"
         />
+
 
     <ExpandableListView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="350dp"
         android:id="@+id/expandableListView"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentStart="true"
         android:layout_marginTop="67dp"
-        android:layout_above="@+id/button"
         android:choiceMode="multipleChoice" />
 
-</RelativeLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:orientation="horizontal"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:id="@+id/linearlayoutbuttons" android:gravity="center"
+        tools:context="com.example.supersaiyans.hangout.myhome"
+        android:layout_alignParentBottom="true">
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/search"
+            android:id="@+id/button"
+            android:onClick="showEvents"/>
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_toEndOf="@+id/imageView"-->
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/create"
+            android:id="@+id/button2"
+            android:onClick="loadEvent" />
+        <!--android:layout_alignTop="@+id/button"-->
+        <!--android:layout_toEndOf="@+id/button"-->
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/map"
+            android:id="@+id/button3"
+            android:onClick="openMap"/>
+        <!--android:layout_alignTop="@+id/button2"-->
+        <!--android:layout_toEndOf="@+id/button2"-->
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/profile"
+            android:id="@+id/button4"
+            android:onClick="openProfile"/>
+        <!--android:layout_alignTop="@+id/button3"-->
+        <!--android:layout_toEndOf="@+id/button3"-->
+
+    </LinearLayout>
+
+</LinearLayout>

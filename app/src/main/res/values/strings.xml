@@ -53,5 +53,9 @@
 
     <!--strings related to profile-->
     <string name="user_name">Alex Wang</string>
+    <string name="search">search</string>
+    <string name="create">create</string>
+    <string name="map">map</string>
+    <string name="profile">me</string>
 
 </resources>
