@@ -18,7 +18,8 @@ public class EventDetailsActivity extends AppCompatActivity {
 //        super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_event_details);
 //    }
-private TextView name;
+    private TextView name;
+
 //    private TextView description;
 //    private TextView time;
 //    private TextView location;
@@ -37,12 +38,13 @@ private TextView name;
         // hard code for testing
         Intent in = getIntent();
         Bundle b = in.getExtras();
-        String myName = b.getString("Title");
+        String myName = b.getString("eventName");
 
         Log.d("EventDetailsActivity", "hi there");
 
         name = (TextView)findViewById(R.id.name);
         name.setText(myName);
+
 //        description = (TextView)findViewById(R.id.description);
 //        description.setText(event.getDescription());
 //

@@ -57,8 +57,8 @@ public class MyLoginActivity extends Activity {
                 String fbId = loginResult.getAccessToken().getUserId();
                 int userId = generateUId(fbId);
                 ClientAdapter adapter = new ClientAdapter();
-                User user = adapter.checkUser(1); //getUser(userId) User user = User object fetched from server
-
+//                User user = adapter.checkUser(1); //getUser(userId) User user = User object fetched from server
+                User user = null;
                 if (user != null) {
                     Log.d("MyLoginActivity", user.toString());
                     Bundle b = new Bundle();

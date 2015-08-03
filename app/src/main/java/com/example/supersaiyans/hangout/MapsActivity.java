@@ -5,6 +5,10 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.supersaiyans.hangout.client.ClientAdapter;
 import com.example.supersaiyans.hangout.model.Event;
@@ -57,7 +61,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMarker
 
 //        events = clientAdapter.getUserEvents();
         for (Event ev : events) {
-            mMap.addMarker(new MarkerOptions().position(new LatLng(ev.getLocation()[0], ev.getLocation()[1])).title(ev.getName()));
+            mMap.addMarker(new MarkerOptions().position(new LatLng(ev.getLocation()[0], ev.getLocation()[1])).title(Integer.toString(ev.getID())));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(ev.getLocation()[0], ev.getLocation()[1])));
         }
         mMap.setOnMarkerClickListener(this);
@@ -65,8 +69,43 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMarker
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-//        Toast.makeText(this, marker.getTitle(), Toast.LENGTH_LONG).show();
-        startActivity(new Intent(MapsActivity.this, EventDetailsActivity.class));
+        Toast.makeText(this, marker.getTitle(), Toast.LENGTH_LONG).show();
+        int myEventID = Integer.parseInt(marker.getTitle());
+
+//        String myEventTime;
+//        String myEventName;
+//        int myEventID;
+//        switch(marker.getId()) {
+//            case R.id.ListView01:
+//                ListView templist = (ListView)arg0;
+//                View mView = templist.getChildAt(arg2);
+//
+//                TextView textViewTitle = (TextView) mView.findViewById(R.id.ItemTitle);
+//                myEventTime = textViewTitle.getText().toString();
+//                TextView textViewText = (TextView) mView.findViewById(R.id.ItemText);
+//                myEventName = textViewText.getText().toString();
+//                TextView textViewID = (TextView) mView.findViewById(R.id.ItemID);
+//                myEventID = Integer.parseInt(textViewID.getText().toString());
+//
+//                Intent intent = new Intent(MapsActivity.this, EventDetailsActivity.class);
+//                intent.putExtra("eventTime", myEventTime);
+//                intent.putExtra("eventName", myEventName);
+//                intent.putExtra("eventID", myEventID);
+//                setResult(2, intent);
+//                Toast.makeText(MapsActivity.this, "have sent event info to eventdetails", Toast.LENGTH_LONG).show();
+//                finish();
+//                startActivityForResult(intent, 2);
+//                break;
+//        }
+        Intent intent = new Intent(MapsActivity.this, EventDetailsActivity.class);
+        intent.putExtra("eventID", myEventID);
+        intent.putExtra("eventName", "this is hardcoded marker name to represent event");
+
+//        startActivity(new Intent(MapsActivity.this, EventDetailsActivity.class));
+        setResult(2, intent);
+        Toast.makeText(MapsActivity.this, "have sent event info to eventdetails", Toast.LENGTH_LONG).show();
+        finish();
+        startActivityForResult(intent, 2);
         return false;
     }
 
@@ -162,4 +201,21 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMarker
 //        mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
 //        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("You are here!").snippet("Consider yourself located"));
 //    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

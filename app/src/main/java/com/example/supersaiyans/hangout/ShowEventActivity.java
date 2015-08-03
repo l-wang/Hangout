@@ -64,18 +64,11 @@ public class ShowEventActivity extends Activity {//don't delete any comment in t
 
         for (Event ev : events) {
             HashMap<String, Object> map = new HashMap<>();
-            map.put("ItemTitle", ev.getTime());
-            map.put("ItemText", ev.getName());
+            map.put("ItemTime", ev.getTime());
+            map.put("ItemName", ev.getName());
+            map.put("ItemEventID", ev.getID());
             listItem.add(map);
         }
-
-//        for (int i = 0; i < 10; i++) {
-//            HashMap<String, Object> map = new HashMap<>();
-////            map.put("ItemImage", R.drawable.checked);//ID of image
-//            map.put("ItemTitle", "event " + i);
-//            map.put("ItemText", "address is at street: " + i);
-//            listItem.add(map);
-//        }
 
         //create adapter item and the element corresponding to array
         // 生成适配器的Item和动态数组对应的元素
@@ -83,8 +76,8 @@ public class ShowEventActivity extends Activity {//don't delete any comment in t
                 R.layout.list_items,//ListItem XML
 //                new String[] {"ItemImage", "ItemTitle", "ItemText"},//动态数组与ImageItem对应的子项
 //                new int[] {R.id.ItemImage, R.id.ItemTitle, R.id.ItemText}//ImageItem的XML文件里面的一个ImageView,两个TextView ID
-                new String[] {"ItemTitle", "ItemText"},
-                new int[] {R.id.ItemTitle, R.id.ItemText}
+                new String[] {"ItemTime", "ItemName", "ItemEventID"},
+                new int[] {R.id.ItemTitle, R.id.ItemText, R.id.ItemID}
         );
 
         //add and show
@@ -94,35 +87,38 @@ public class ShowEventActivity extends Activity {//don't delete any comment in t
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
                 setTitle("click #" + arg2 + "item");
-                String mytitle = null;
-                String mycontent = null;
+                String myEventTime;
+                String myEventName;
+                int myEventID;
 
-                switch(arg0.getId())
-                {
+                switch(arg0.getId()) {
                     case R.id.ListView01:
                         ListView templist = (ListView)arg0;
                         View mView = templist.getChildAt(arg2);
 
                         TextView textViewTitle = (TextView) mView.findViewById(R.id.ItemTitle);
-                        mytitle = textViewTitle.getText().toString();
+                        myEventTime = textViewTitle.getText().toString();
+                        TextView textViewText = (TextView) mView.findViewById(R.id.ItemText);
+                        myEventName = textViewText.getText().toString();
+                        TextView textViewID = (TextView) mView.findViewById(R.id.ItemID);
+                        myEventID = Integer.parseInt(textViewID.getText().toString());
+
 
 //                        mysqlhelper.db = mysqlhelper.mOpenHelper.getReadableDatabase();
 //                        Cursor cur = mysqlhelper.db.rawQuery("select Content from Table_1 where Title = ?",new String[]{mytitle});
 //                        int count = cur.getCount();
 //                        cur.moveToFirst();
 //                        mycontent = cur.getString(0);
-                        TextView textViewText = (TextView) mView.findViewById(R.id.ItemText);
-                        mycontent = textViewText.getText().toString();
-
 
 //                                 cur.close();
 //                        mysqlhelper.db.close();
 
                         Intent intent = new Intent(ShowEventActivity.this, EventDetailsActivity.class);
-                        intent.putExtra("Title", mytitle);
-                        intent.putExtra("Content", mycontent);
+                        intent.putExtra("eventTime", myEventTime);
+                        intent.putExtra("eventName", myEventName);
+                        intent.putExtra("eventID", myEventID);
                         setResult(2, intent);
-                        Toast.makeText(ShowEventActivity.this, "send event info to eventdetails", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ShowEventActivity.this, "have sent event info to eventdetails", Toast.LENGTH_LONG).show();
                         finish();
                         startActivityForResult(intent, 2);
                         break;
@@ -135,10 +131,9 @@ public class ShowEventActivity extends Activity {//don't delete any comment in t
             @Override
             public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
                 menu.setHeaderTitle("long-click events operations: ");
-                menu.add(0, 0, Menu.NONE, "WANNA SEE Event Details ?");
+                menu.add(0, 0, Menu.NONE, "DELETE ?");
                 menu.add(0, 1, Menu.NONE, "more operations TO BE ADDED !!!");
 //                menu.add(0, 1, 0, "pop up long-press menu 1");
-
             }
         });
     }

@@ -29,4 +29,11 @@
         android:layout_below="@+id/ItemTitle"
         android:id="@+id/ItemText"
         />
+    <TextView
+        android:text="TextView03"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_below="@+id/ItemText"
+        android:id="@+id/ItemID"
+        />
 </RelativeLayout> 

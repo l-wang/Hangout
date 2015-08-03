@@ -4,6 +4,7 @@ package com.example.supersaiyans.hangout;
 import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.internal.widget.AdapterViewCompat;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,7 +13,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 import com.example.supersaiyans.hangout.client.ClientAdapter;
 import com.example.supersaiyans.hangout.model.Event;
 import com.example.supersaiyans.hangout.model.User;
@@ -60,8 +63,9 @@ public class ProfileActivity extends Activity {
 
         for (Event ev : events) {
             HashMap<String, Object> map = new HashMap<>();
-            map.put("ItemTitle", ev.getTime());
-            map.put("ItemText", ev.getName());
+            map.put("ItemTime", ev.getTime());
+            map.put("ItemName", ev.getName());
+            map.put("ItemEventID", ev.getID());
             listItem.add(map);
         }
 
@@ -69,18 +73,54 @@ public class ProfileActivity extends Activity {
         // 生成适配器的Item和动态数组对应的元素
         SimpleAdapter listItemAdapter = new SimpleAdapter(this, listItem,//data
                 R.layout.list_items,//ListItem XML
-                new String[] {"ItemTitle", "ItemText"},//动态数组与ImageItem对应的子项
-                new int[] {R.id.ItemTitle, R.id.ItemText}//ImageItem的XML文件里面的一个ImageView,两个TextView ID
+                new String[] {"ItemTime", "ItemName", "ItemEventID"},//动态数组与ImageItem对应的子项
+                new int[] {R.id.ItemTitle, R.id.ItemText, R.id.ItemID}//ImageItem的XML文件里面的一个ImageView,两个TextView ID
         );
 
         //add and show
         list.setAdapter(listItemAdapter);
 
 
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        list.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
                 setTitle("click #" + arg2 + "item");
+                String myEventTime;
+                String myEventName;
+                int myEventID;
+
+                switch(arg0.getId()) {
+                    case R.id.ListView02:
+                        ListView templist = (ListView)arg0;
+                        View mView = templist.getChildAt(arg2);
+
+                        TextView textViewTitle = (TextView) mView.findViewById(R.id.ItemTitle);
+                        myEventTime = textViewTitle.getText().toString();
+                        TextView textViewText = (TextView) mView.findViewById(R.id.ItemText);
+                        myEventName = textViewText.getText().toString();
+                        TextView textViewID = (TextView) mView.findViewById(R.id.ItemID);
+                        myEventID = Integer.parseInt(textViewID.getText().toString());
+
+
+//                        mysqlhelper.db = mysqlhelper.mOpenHelper.getReadableDatabase();
+//                        Cursor cur = mysqlhelper.db.rawQuery("select Content from Table_1 where Title = ?",new String[]{mytitle});
+//                        int count = cur.getCount();
+//                        cur.moveToFirst();
+//                        mycontent = cur.getString(0);
+
+//                                 cur.close();
+//                        mysqlhelper.db.close();
+
+                        Intent intent = new Intent(ProfileActivity.this, EventDetailsActivity.class);
+                        intent.putExtra("eventTime", myEventTime);
+                        intent.putExtra("eventName", myEventName);
+                        intent.putExtra("eventID", myEventID);
+                        setResult(2, intent);
+                        Toast.makeText(ProfileActivity.this, "have sent event info to eventdetails", Toast.LENGTH_LONG).show();
+                        finish();
+                        startActivityForResult(intent, 2);
+                        break;
+                }
             }
         });
 
@@ -88,9 +128,10 @@ public class ProfileActivity extends Activity {
         list.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             @Override
             public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-                menu.setHeaderTitle("long-press menu-ContextMenu");
-                menu.add(0, 0, 0, "pop up EventDetails ?");
-                menu.add(0, 1, 0, "pop up long-press menu 1");
+                menu.setHeaderTitle("long-click events operations: ");
+                menu.add(0, 0, Menu.NONE, "DELETE ?");
+                menu.add(0, 1, Menu.NONE, "more operations TO BE ADDED !!!");
+//                menu.add(0, 1, 0, "pop up long-press menu 1");
             }
         });
     }
