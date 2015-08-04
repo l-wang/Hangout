@@ -2,6 +2,8 @@ package com.example.supersaiyans.hangout;
 
 
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +20,8 @@ import com.example.supersaiyans.hangout.model.User;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 public class EventActivity extends ActionBarActivity {
@@ -35,6 +39,7 @@ public class EventActivity extends ActionBarActivity {
         eventTime = (EditText) findViewById(R.id.eventTime);
         eventDescription = (EditText) findViewById(R.id.eventDescription);
         eventLocation = (EditText) findViewById(R.id.eventLocation);
+
     }
 
     @Override
@@ -65,9 +70,10 @@ public class EventActivity extends ActionBarActivity {
         d[1]=1.1d;
         String time = "31-Aug-2015";
         Event e = new Event("test",1,d,1,time);*/
-      /*  Random r = new Random(System.currentTimeMillis());
+        Random r = new Random(System.currentTimeMillis());
         String eName = eventName.getText().toString();
         int eventID = r.nextInt(90000);
+        // fetch userr id
         int userID=1;
         String time= eventTime.getText().toString();
         SimpleDateFormat s = new SimpleDateFormat("dd-MM-yyyy");
@@ -83,25 +89,58 @@ public class EventActivity extends ActionBarActivity {
         }
         //Log.d("checktime", time);
         //hard coding location co-ordinates for now
-        Double[] location = new Double[2];
+        String address = eventLocation.getText().toString();
+
+
+        getLatLongFromGivenAddress(address);
+        /*Double[] location = new Double[2];
         location[0]=0.0d;
         location[1]=0.0d;
         Event e = new Event(eName,eventID,location,userID,time);
         ClientAdapter ca = new ClientAdapter();
         ca.createEvent(e);
         Toast.makeText(EventActivity.this, "Event created", Toast.LENGTH_LONG).show();*/
-        ClientAdapter ca = new ClientAdapter();
+       /* ClientAdapter ca = new ClientAdapter();
         User user = ca.checkUser(1);
         if(user!=null){
             Log.d("userchkkkkkk",user.getName());
         }
         else{
             Log.d("userchkkkkkkfae","");
-        }
+        }*/
 
         //ca.getAllEvents();
         //Intent intent = new Intent(this,ShowEventActivity.class);
         //startActivity(intent);
     }
 
+    public  void getLatLongFromGivenAddress(String address)
+    {
+        double lat= 0.0, lng= 0.0;
+
+        Geocoder geoCoder = new Geocoder(this, Locale.getDefault());
+        try
+        {
+            List<Address> addresses = geoCoder.getFromLocationName(address , 1);
+
+            if (addresses.size() > 0)
+            {
+                Address a = addresses.iterator().next();
+               lat = a.getLatitude();
+               lng = a.getLongitude();
+              //  lat=p.getLatitudeE6()/1E6;
+              //  lng=p.getLongitudeE6()/1E6;
+
+                Log.d("Latitude", ""+lat);
+                Log.d("Longitude", ""+lng);
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
 }
+
+
+
