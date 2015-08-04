@@ -92,7 +92,7 @@ public class EventActivity extends ActionBarActivity {
         String address = eventLocation.getText().toString();
 
 
-        getLatLongFromGivenAddress(address);
+        Double[] location  = getLatLongFromGivenAddress(address);
         /*Double[] location = new Double[2];
         location[0]=0.0d;
         location[1]=0.0d;
@@ -109,12 +109,21 @@ public class EventActivity extends ActionBarActivity {
             Log.d("userchkkkkkkfae","");
         }*/
 
+        if(location==null){
+            location[0]=0.0;
+            location[1]=0.0d;
+        }
+        Event e = new Event(eName,eventID,location,userID,time);
+        ClientAdapter ca = new ClientAdapter();
+        ca.createEvent(e);
+        Toast.makeText(EventActivity.this, "Event created", Toast.LENGTH_LONG).show();
+
         //ca.getAllEvents();
         //Intent intent = new Intent(this,ShowEventActivity.class);
         //startActivity(intent);
     }
 
-    public  void getLatLongFromGivenAddress(String address)
+    public  Double[] getLatLongFromGivenAddress(String address)
     {
         double lat= 0.0, lng= 0.0;
 
@@ -134,10 +143,20 @@ public class EventActivity extends ActionBarActivity {
                 Log.d("Latitude", ""+lat);
                 Log.d("Longitude", ""+lng);
             }
+
+            else {
+                lat=0.0;
+                lng=0.0;
+            }
+            Double[] d = new Double[2];
+            d[0]=lat;
+            d[1]=lng;
+            return d;
         }
         catch(Exception e)
         {
             e.printStackTrace();
+            return null;
         }
     }
 }
